@@ -1,0 +1,143 @@
+.card {
+  position: relative !important;
+  max-width: 420px !important;
+  width: 100% !important;
+  background: rgb(255, 255, 255) !important;
+  box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px !important;
+  border-radius: 30px !important;
+  border: none !important;
+}
+
+.container-card {
+  position: relative;
+  padding: 1rem;
+}
+
+.box {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 12px;
+}
+
+.container-btn {
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+}
+
+.container-exchange {
+  border-radius: 20px;
+  border: 1px solid rgb(247, 248, 250);
+  background-color: rgb(255, 255, 255);
+}
+
+.input-exchange {
+  color: rgb(33, 36, 41);
+  width: 0px;
+  position: relative;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  flex: 1 1 auto;
+  /* background-color: rgb(33, 36, 41); */
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px;
+  appearance: textfield;
+}
+
+.container-title {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  -webkit-box-align: center !important;
+  align-items: center !important;
+  color: rgb(0, 0, 0) !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  padding: 0.75rem 1rem 0px !important;
+}
+
+.title {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.title-text {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(86, 90, 105);
+}
+
+.button-exchange {
+  -webkit-box-align: center;
+  align-items: center;
+  height: 2.2rem;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 12px;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  padding: 0px 0.5rem;
+}
+
+.span-btn {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.coin-img {
+  width: 24px;
+  height: 24px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+  border-radius: 24px;
+}
+
+.text-coin {
+  margin: 0px 0.25rem 0px 0.75rem;
+  font-size: 20px;
+}
+
+.button-output {
+  -webkit-box-align: center;
+  align-items: center;
+  height: 2.2rem;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #fd6fff;
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  padding: 0px 0.5rem;
+}
+
+.fa-chevron-down {
+  margin: 0px 0.25rem 0px 0.5rem;
+  height: 35%;
+}

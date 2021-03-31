@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavigationBar from './components/NavigationBar';
+import Exchange from './components/Exchange';
 import { getWeb3OnLoad } from './adapters/getWeb3';
 import ReactLoading from 'react-loading';
 
@@ -9,14 +10,15 @@ import './App.css';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { web3: null, account: null, loading: true };
+    this.state = { web3: null, account: null, loading: true, hasPermission: JSON.parse(localStorage.getItem('hasPermission')), networkId: null };
   }
 
   componentDidMount = async () => {
     try {
-      if (JSON.parse(localStorage.getItem('hasPermission'))) {
+      if (this.state.hasPermission) {
         const web3 = await getWeb3OnLoad();
         const accounts = await web3.eth.getAccounts();
+        console.log(web3.eth);
         // Setto delay di 1,5 secondi per mostrare loading
         setTimeout(async () => {
           this.setState({ web3, account: accounts[0], loading: false });
@@ -45,7 +47,8 @@ export default class App extends Component {
     }
     return (
       <>
-        <NavigationBar account={this.state.account} />
+        <NavigationBar account={this.state.account} hasPermission={this.state.hasPermission} />
+        <Exchange />
       </>
     );
   }
