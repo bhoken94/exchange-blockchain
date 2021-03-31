@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,100&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App {
+  text-align: center;
+}
+
+.btn-accent {
+  background-color: #6fffb0 !important;
+  border-color: #6fffb0 !important;
+  color: black !important;
+  border-radius: 30px;
+}
+
+.btn-accent.disabled,
+.btn-accent[disabled],
+.btn-accent:disabled {
+  background-color: #6fffb0 !important;
+  border-color: #6fffb0 !important;
+  color: black !important;
+  border-radius: 30px;
+  opacity: 100;
+}
+
+.bg-accent2 {
+  background-color: #7d4cdb !important;
+}
