@@ -9,12 +9,17 @@ import './NavigationBar.css';
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { account: this.props.account, loginDisabled: false, hasPermission: this.props.hasPermission };
+    this.state = {
+      account: this.props.account,
+      loginDisabled: false,
+      hasPermission: this.props.hasPermission,
+      isUnlocked: this.props.isUnlocked,
+    };
     this.handleMetamaskLogin = this.handleMetamaskLogin.bind(this);
   }
 
   componentDidMount = () => {
-    if (this.state.hasPermission) {
+    if (this.state.hasPermission && this.state.isUnlocked) {
       this.setState({ loginDisabled: true });
     }
   };
@@ -38,7 +43,7 @@ export default class NavigationBar extends Component {
         <div>
           <FontAwesomeIcon icon={faExchangeAlt} />
           <Navbar.Brand href="#home" className="ml-3">
-            Scambia
+            TokenAle
           </Navbar.Brand>
         </div>
         <div className="d-flex align-items-center">

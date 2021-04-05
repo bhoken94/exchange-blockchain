@@ -66,16 +66,4 @@ const getWeb3OnLoad = () =>
     });
   });
 
-const handleAccountChanged = (state) => {
-  window.ethereum.on('accountsChanged', function (accounts) {
-    // Time to reload your interface with accounts[0]!
-  });
-};
-
-const handleNetworkChanged = (state) => {
-  window.ethereum.on('chainChanged', function (networkId) {
-    // Time to reload your interface with the new networkId
-  });
-};
-
-export { getWeb3OnLoad, getWeb3, handleAccountChanged, handleNetworkChanged };
+export { getWeb3OnLoad, getWeb3 };

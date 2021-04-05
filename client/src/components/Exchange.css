@@ -10,7 +10,6 @@
 
 .container-card {
   position: relative;
-  padding: 1rem;
 }
 
 .box {
@@ -29,19 +28,19 @@
 
 .container-exchange {
   border-radius: 20px;
-  border: 1px solid rgb(247, 248, 250);
+  /* border: 1px solid rgb(247, 248, 250); */
   background-color: rgb(255, 255, 255);
 }
 
 .input-exchange {
   color: rgb(33, 36, 41);
-  width: 0px;
+  width: 260px;
   position: relative;
   font-weight: 500;
   outline: none;
   border: none;
   flex: 1 1 auto;
-  /* background-color: rgb(33, 36, 41); */
+  background-color: rgb(255, 255, 255);
   font-size: 24px;
   white-space: nowrap;
   overflow: hidden;
@@ -94,7 +93,7 @@
   border-radius: 12px;
   box-shadow: none;
   outline: none;
-  cursor: pointer;
+  cursor: default !important;
   user-select: none;
   border: none;
   padding: 0px 0.5rem;
@@ -140,4 +139,50 @@
 .fa-chevron-down {
   margin: 0px 0.25rem 0px 0.5rem;
   height: 35%;
+}
+
+.box-button {
+  margin-top: 1rem;
+}
+
+.box-button-submit {
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  background-color: rgb(253, 234, 241);
+  color: rgb(255, 0, 122);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.divider-container {
+  display: grid;
+  grid-auto-rows: auto;
+}
+
+.divider {
+  padding: 0px 1rem;
+}
+
+.container-btn-all {
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  border-radius: 20px;
+  background-color: rgb(247, 248, 250);
+  z-index: 1;
+  border: 1px solid rgb(247, 248, 250);
 }
