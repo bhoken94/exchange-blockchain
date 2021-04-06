@@ -12,3 +12,37 @@
   padding: 0.15rem 0.5rem;
   border-radius: 0.5rem;
 }
+
+.button-token {
+  position: relative;
+  width: 100%;
+  border: none;
+  margin: 0px 0px 0px 8px;
+  height: 35px;
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%, rgb(255, 0, 122) 0%, rgb(33, 114, 229) 100%), rgb(237, 238, 242);
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.5rem;
+  color: rgb(237, 238, 242);
+  font-weight: 500;
+}
+
+.btn-accent {
+  background-color: #6fffb0 !important;
+  border-color: #6fffb0 !important;
+  color: black !important;
+  border-radius: 0.5rem !important;
+}
+
+.btn-accent.disabled,
+.btn-accent[disabled],
+.btn-accent:disabled {
+  background-color: #6fffb0 !important;
+  border-color: #6fffb0 !important;
+  color: black !important;
+  border-radius: 30px;
+  opacity: 100;
+}
+
+.bg-accent2 {
+  background-color: #7d4cdb !important;
+}

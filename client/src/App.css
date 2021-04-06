@@ -26,24 +26,3 @@ body {
 .App {
   text-align: center;
 }
-
-.btn-accent {
-  background-color: #6fffb0 !important;
-  border-color: #6fffb0 !important;
-  color: black !important;
-  border-radius: 30px;
-}
-
-.btn-accent.disabled,
-.btn-accent[disabled],
-.btn-accent:disabled {
-  background-color: #6fffb0 !important;
-  border-color: #6fffb0 !important;
-  color: black !important;
-  border-radius: 30px;
-  opacity: 100;
-}
-
-.bg-accent2 {
-  background-color: #7d4cdb !important;
-}

@@ -7,7 +7,13 @@ import './Exchange.css';
 export default class Exchange extends Component {
   constructor(props) {
     super(props);
-    this.state = { account: this.props.account, contract: this.props.contract, amount: null, amountWithdraw: null };
+    this.state = {
+      account: this.props.account,
+      contract: this.props.exchange,
+      amount: '',
+      amountWithdraw: '',
+      getBalanceOf: this.props.getBalanceOf,
+    };
     this.handleChangeDeposit = this.handleChangeDeposit.bind(this);
     this.handleChangeWithdraw = this.handleChangeWithdraw.bind(this);
     this.handleSubmitDeposit = this.handleSubmitDeposit.bind(this);
@@ -28,22 +34,26 @@ export default class Exchange extends Component {
       try {
         let amount = this.state.amount * 10 ** 18;
         this.state.contract.methods.deposit().send({ value: amount.toString(), from: this.state.account });
+        this.setState({ amount: '' });
       } catch (e) {
         console.log(e);
       }
     }
   }
 
-  handleSubmitWithdraw(event) {
+  handleSubmitWithdraw = async (event) => {
     event.preventDefault();
     if (this.state.contract !== 'undefined') {
       try {
-        this.state.contract.methods.withDraw().send({ from: this.state.account });
+        await this.state.contract.methods.withDraw().send({ from: this.state.account });
+        this.setState({ amountWithdraw: '' });
+        // Aggiorno il saldo del component app che aggiornerà il component navigation
+        this.state.getBalanceOf();
       } catch (e) {
         console.log(e);
       }
     }
-  }
+  };
 
   render() {
     return (
@@ -63,7 +73,7 @@ export default class Exchange extends Component {
                       </div>
                       <div className="container-btn">
                         <form id="submitAmount" onSubmit={this.handleSubmitDeposit}>
-                          <input className="input-exchange" type="text" inputMode="decimal" placeholder="0.0" onChange={this.handleChangeDeposit} />
+                          <input className="input-exchange" type="text" inputMode="decimal" placeholder="0.0" onChange={this.handleChangeDeposit} value={this.state.amount} />
                         </form>
                         <button className="button-exchange">
                           <span className="span-btn">
@@ -81,7 +91,7 @@ export default class Exchange extends Component {
                       </div>
                       <div className="container-btn">
                         <form id="submitAmountWithdraw" onSubmit={this.handleSubmitWithdraw}>
-                          <input className="input-exchange" type="text" inputMode="decimal" placeholder="0.0" onChange={this.handleChangeWithdraw} />
+                          <input className="input-exchange" type="text" inputMode="decimal" placeholder="0.0" min="0.01" onChange={this.handleChangeWithdraw} value={this.state.amountWithdraw} />
                         </form>
                       </div>
                     </div>

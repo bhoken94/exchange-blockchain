@@ -1,8 +1,13 @@
-const EVM_REVERT = require('./helpers');
-const wait = require('./helpers');
+const EVM_REVERT = 'VM Exception while processing transaction: revert';
+const wait = (s) => {
+  const milliseconds = s * 1000;
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
 
 const Token = artifacts.require('./Token');
 const Exchange = artifacts.require('./Exchange');
+
+require('chai').use(require('chai-as-promised')).should();
 
 contract('Exchange', ([deployer, user]) => {
   let exchange, token;
@@ -82,7 +87,7 @@ contract('Exchange', ([deployer, user]) => {
         await wait(2); //accruing interest
 
         balance = await web3.eth.getBalance(user);
-        await exchange.withdraw({ from: user });
+        await exchange.withDraw({ from: user });
       });
 
       it('balances should decrease', async () => {
@@ -97,6 +102,7 @@ contract('Exchange', ([deployer, user]) => {
       it('user should receive proper amount of interest', async () => {
         //time synchronization problem make us check the 1-3s range for 2s deposit time
         balance = Number(await token.balanceOf(user));
+        console.log(balance);
         expect(balance).to.be.above(0);
         expect(balance % interestPerSecond).to.eq(0);
         expect(balance).to.be.below(interestPerSecond * 4);
@@ -113,7 +119,7 @@ contract('Exchange', ([deployer, user]) => {
       it('withdrawing should be rejected', async () => {
         await exchange.deposit({ value: 10 ** 16, from: user }); //0.01 ETH
         await wait(2); //accruing interest
-        await exchange.withdraw({ from: deployer }).should.be.rejectedWith(EVM_REVERT); //wrong user
+        await exchange.withDraw({ from: deployer }).should.be.rejectedWith(EVM_REVERT); //wrong user
       });
     });
   });

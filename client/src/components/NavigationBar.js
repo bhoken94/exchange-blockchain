@@ -14,13 +14,15 @@ export default class NavigationBar extends Component {
       loginDisabled: false,
       hasPermission: this.props.hasPermission,
       isUnlocked: this.props.isUnlocked,
+      balanceOf: this.props.balanceOf,
     };
     this.handleMetamaskLogin = this.handleMetamaskLogin.bind(this);
   }
 
-  componentDidMount = () => {
-    if (this.state.hasPermission && this.state.isUnlocked) {
-      this.setState({ loginDisabled: true });
+  //Quando il props cambia aggiorno il component
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.balanceOf !== this.props.balanceOf) {
+      this.setState({ balanceOf: this.props.balanceOf });
     }
   };
 
@@ -47,6 +49,12 @@ export default class NavigationBar extends Component {
           </Navbar.Brand>
         </div>
         <div className="d-flex align-items-center">
+          <button className="button-token mr-2">
+            <div className="d-flex">
+              {!this.state.account ? 'EC' : this.state.balanceOf}
+              <span>&nbsp;EC</span>
+            </div>
+          </button>
           <Button disabled={this.state.loginDisabled} className="btn-accent" onClick={this.handleMetamaskLogin}>
             <strong>{!this.state.account ? 'Connect' : this.getSubAddress(this.state.account)}</strong>
           </Button>

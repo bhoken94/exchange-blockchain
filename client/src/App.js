@@ -4,6 +4,7 @@ import Exchange from './components/Exchange';
 import { getWeb3OnLoad } from './adapters/getWeb3';
 import ReactLoading from 'react-loading';
 import ExchangeContract from './artifacts/Exchange.json';
+import TokenContract from './artifacts/Token.json';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -17,8 +18,9 @@ export default class App extends Component {
       loading: true,
       hasPermission: JSON.parse(localStorage.getItem('hasPermission')),
       isUnlocked: false,
-      contract: null,
-      exchangeAddress: null,
+      exchange: null,
+      token: null,
+      balanceOf: null,
     };
   }
 
@@ -31,12 +33,15 @@ export default class App extends Component {
           const accounts = await web3.eth.getAccounts();
           // Get the contract instance.
           const networkId = await web3.eth.net.getId();
-          const deployedNetwork = ExchangeContract.networks[networkId];
-          const instance = new web3.eth.Contract(ExchangeContract.abi, deployedNetwork && deployedNetwork.address);
-          // const exchangeAddress = instance.networks[networkId].address;
+          const exchangeNetwork = ExchangeContract.networks[networkId];
+          const tokenNetwork = TokenContract.networks[networkId];
+          const exchange = new web3.eth.Contract(ExchangeContract.abi, exchangeNetwork && exchangeNetwork.address);
+          const token = new web3.eth.Contract(TokenContract.abi, tokenNetwork && tokenNetwork.address);
+          //Calcolo balance token
+          const balanceOf = await token.methods.balanceOf(accounts[0]).call();
           // Setto delay di 1,5 secondi per mostrare loading
           setTimeout(async () => {
-            this.setState({ web3, account: accounts[0], loading: false, isUnlocked: true, contract: instance });
+            this.setState({ web3, account: accounts[0], loading: false, isUnlocked: true, exchange, token, balanceOf: web3.utils.fromWei(balanceOf) });
           }, 1500);
         } else {
           this.setState({ loading: false });
@@ -62,6 +67,12 @@ export default class App extends Component {
   //   });
   // };
 
+  getBalanceOf = async () => {
+    const balanceOf = await this.state.token.methods.balanceOf(this.state.account).call();
+    console.log(balanceOf);
+    this.setState({ balanceOf: this.state.web3.utils.fromWei(balanceOf) });
+  };
+
   render() {
     if (this.state.loading) {
       return (
@@ -76,8 +87,9 @@ export default class App extends Component {
     }
     return (
       <>
-        <NavigationBar account={this.state.account} hasPermission={this.state.hasPermission} isUnlocked={this.state.isUnlocked} />
-        <Exchange account={this.state.account} contract={this.state.contract} />
+        <NavigationBar account={this.state.account} hasPermission={this.state.hasPermission} isUnlocked={this.state.isUnlocked} balanceOf={this.state.balanceOf} />
+        {/*Passo il metodo per avere il balance al component per poterlo richiamare nel component figlio*/}
+        <Exchange account={this.state.account} exchange={this.state.exchange} getBalanceOf={this.getBalanceOf} />
       </>
     );
   }
